@@ -32,9 +32,16 @@ public class APIConfig extends CachingConfigurerSupport {
         twentySecondCache.maxEntriesLocalHeap(1000);
         twentySecondCache.setTimeToLiveSeconds(20);
 
+        CacheConfiguration thirtySecondCache = new CacheConfiguration();
+        thirtySecondCache.setName("thirty-second-cache");
+        thirtySecondCache.setMemoryStoreEvictionPolicy("LRU");
+        thirtySecondCache.maxEntriesLocalHeap(1000);
+        thirtySecondCache.setTimeToLiveSeconds(30);
+
         net.sf.ehcache.config.Configuration configuration = new net.sf.ehcache.config.Configuration();
         configuration.addCache(tenSecondCache);
         configuration.addCache(twentySecondCache);
+        configuration.addCache(thirtySecondCache);
         return net.sf.ehcache.CacheManager.newInstance(configuration);
     }
 
